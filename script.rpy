@@ -58,7 +58,7 @@ label start:
  
 label choice_refuse:
 
-    scene images_Street
+    scene Street
 
     "* вы решили не брать такую ответственность на себя *"
 
@@ -109,7 +109,7 @@ label bad_bathing:
     с "МРР-А-РР"
 
     y "Ай! "
-    
+
     "* однако он, кажется, не оценил это"
 
     $ love -= 1
