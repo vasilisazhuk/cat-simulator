@@ -17,33 +17,24 @@ screen loveMeter:
         left_bar Frame("gui/bar/left.png", 10, 10)
         right_bar Frame("gui/bar/right.png", 10, 10)
 
-if loveMeter == 0:
+#if love == 0:
+#    window hide
+#    scene the_End with Fade(1.0, 1.5, 1.0)
+#    with Pause(10)
+#    return 
 
-    window hide
+#if love == 5:
+#   scene home
+#  show playfullCat
+# "* котенок счастливо прильнул к вам *"
+    #"* вы больше никогда не будите одиноки *"
+    #c " мр-мяу "
+    #y "да-да, мяу"
+    #window hide
     
-    scene the_End with Fade(1.0, 1.5, 1.0)
+#    scene good_End with Fade(1.0, 1.5, 1.0)
 
-    with Pause(10)
-    
-    return 
-
-if loveMeter == 5:
-    
-    scene home
-    
-    show playfullCat
-    "* котенок счастливо прильнул к вам *"
-    "* вы больше никогда не будите одиноки *"
-    
-    c " мр-мяу "
-    
-    y "да-да, мяу"
-    
-    window hide
-    
-    scene good_End with Fade(1.0, 1.5, 1.0)
-
-    with Pause(10)
+#    with Pause(10)
 
 
 label start:
@@ -102,6 +93,7 @@ label main_choice:
             jump bad_bathing
         "покормить": 
             jump Food
+    return
 
 label bad_bathing:
 
@@ -118,7 +110,12 @@ label bad_bathing:
     y "Ай! "
     "* однако он, кажется, не оценил это"
 
-    $ loveMeter -= 1
+    $ love -= 1
+
+    window hide
+    scene the_End with Fade(1.0, 1.5, 1.0)
+    with Pause(10)
+    return 
 
     return
 
@@ -131,12 +128,46 @@ label Food:
 
     show mainCat
 
-    $ loveMeter += 2
+    $ love += 2
     
     "* кот с аппетитом доел консерву и теперь мурчал *"
 
-    "* кажется, вы заполочили доверие вашего маленького друга *"
+    "* кажется, вы заполучили доверие вашего маленького друга *"
 
     show playfullCat
 
+    "* выкинув жестяную консерву в мусорку,\n вы вернулись к котенку, довольно вылизывавшего себе лапки и усы *"
+    show sleepyCat
+    "* вы потрепали котенка между ушек, вздохнув"
+
+    menu: 
+        y "и что же мне с тобой делать, таким грязным?"
+        "все-таки помыть":
+            jump good_bathing
+        "поиграть":
+            jump playng
+
+    return
+label playng: 
+    scene home 
+    show mainCat
+    "* вы ласково трогаете котенка за животик"
+    "* он игриво отгоняет лапками вашу руку, энергично извиваясь на диване *"
+    $ love += 2
+    "* котенок счастливо прильнул к вам *"
+    c " мр-мяу "
+    y "да-да, мяу"
+    "* вы больше никогда не будите одиноки *"
+    window hide
+    scene good_End with Fade(1.0, 1.5, 1.0)
+    with Pause(10)
+    return
+label good_bathing:
+    scene home 
+    show CatThinks
+    "* вы долго настраивали температуру воды, чтобы вашему новому другу было как можно приятнее *"
+    "* решив для себя что все готово, вы осторожно взяли на руки котенка и опустили его в теплую ванночку *"
+    "* ... *"
+    "* коту все равно, тунец задобрил его и он флегматично наблюдает как вы вымываете его шерсть *"
+    jump playng
     return
