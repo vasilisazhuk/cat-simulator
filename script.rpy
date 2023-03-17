@@ -39,12 +39,12 @@ screen loveMeter:
 
 label start:
 
-    scene images_BlackScreen
+    scene grayscreen
 
     "* вы возвращаетесь домой *"
     "* но вдруг вы услышали тихое мяуканье в коробке * "
 
-    scene Street
+    scene street
     with Fade(1.0, 1.5, 1.0, color ="#8f8f8f" )
 
     menu firstChoice:
@@ -58,7 +58,7 @@ label start:
  
 label choice_refuse:
 
-    scene Street
+    scene street
 
     "* вы решили не брать такую ответственность на себя *"
 
@@ -66,14 +66,14 @@ label choice_refuse:
 
     window hide
     
-    scene the_End with Fade(1.0, 1.5, 1.0)
+    scene theend with Fade(1.0, 1.5, 1.0)
 
     with Pause(10)
     
     return 
 
 label main_choice: 
-    scene Street
+    scene street
      
     "* вы решили, что вам слишком одиноко в квартире и забрали кота *"
 
@@ -81,7 +81,7 @@ label main_choice:
 
     show screen loveMeter
 
-    show mainCat
+    show maincat
 
     "* спустя долгий рабочий день и одну неожиданную встречу вы наконец-то дома *"
     "* ваш гость с интересом принюхивается и разглядывает окружение, сидя у вас на руках *"
@@ -97,16 +97,17 @@ label main_choice:
 
 label bad_bathing:
 
-    scene GrayScreen
+    scene grayscreen
 
-    show catThinks
+    show catthinks
 
     "* вы долго настраивали температуру воды, чтобы вашему новому другу было как можно приятнее *"
     "* решив для себя что все готово, вы осторожно взяли на руки котенка и опустили его в теплую ванночку *"
     "* ... *"
+    hide catthinks
 
-    show madCat
-    с "МРР-А-РР"
+    show madcat
+    c "МРР-А-РР"
 
     y "Ай! "
 
@@ -115,31 +116,35 @@ label bad_bathing:
     $ love -= 1
 
     window hide
-    scene the_End with Fade(1.0, 1.5, 1.0)
+    scene theend with Fade(1.0, 1.5, 1.0)
     with Pause(10)
     return 
 
     return
 
 label Food:
-    scene GrayScreen
+    scene grayscreen
 
     "* вы нашли у себя в холодильнике наполовину полную банку тунца *"
 
     "* кот нетерпеливо веритится у вас под ногами, жалобно мяукая *"
 
-    show mainCat
+    show maincat
 
     $ love += 2
     
-    "* кот с аппетитом доел консерву и теперь мурчал *"
+    "* кот с аппетитом доел содержимое консервы и теперь довольно мурчал *"
 
     "* кажется, вы заполучили доверие вашего маленького друга *"
 
-    show playfullCat
+    hide maincat
+
+    show playfullcat
 
     "* выкинув жестяную консерву в мусорку,\n вы вернулись к котенку, довольно вылизывавшего себе лапки и усы *"
-    show sleepyCat
+    hide playfullcat
+
+    show sleepycat
     "* вы потрепали котенка между ушек, вздохнув"
 
     menu: 
@@ -152,7 +157,7 @@ label Food:
     return
 label playng: 
     scene home 
-    show mainCat
+    show maincat
     "* вы ласково трогаете котенка за животик"
     "* он игриво отгоняет лапками вашу руку, энергично извиваясь на диване *"
     $ love += 2
@@ -161,12 +166,12 @@ label playng:
     y "да-да, мяу"
     "* вы больше никогда не будите одиноки *"
     window hide
-    scene good_End with Fade(1.0, 1.5, 1.0)
+    scene goodending with Fade(1.0, 1.5, 1.0)
     with Pause(10)
     return
 label good_bathing:
     scene home 
-    show CatThinks
+    show catthinks
     "* вы долго настраивали температуру воды, чтобы вашему новому другу было как можно приятнее *"
     "* решив для себя что все готово, вы осторожно взяли на руки котенка и опустили его в теплую ванночку *"
     "* ... *"
