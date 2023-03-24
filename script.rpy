@@ -2,6 +2,10 @@
 define c = Character("Кот", color ="#9c690a")
 define y = Character("Вы", color ="#000000" )
 
+define audio.mew = "audio/meow.mp3"
+define audio.purr = "audio/mrmeowa.mp3"
+define audio.sity = "audio/soundstreet.mp3"
+
 default maxLove = 5
 default minLove = 0
 
@@ -17,27 +21,10 @@ screen loveMeter:
         left_bar Frame("gui/bar/left.png", 10, 10)
         right_bar Frame("gui/bar/right.png", 10, 10)
 
-#if love == 0:
-#    window hide
-#    scene the_End with Fade(1.0, 1.5, 1.0)
-#    with Pause(10)
-#    return 
-
-#if love == 5:
-#   scene home
-#  show playfullCat
-# "* котенок счастливо прильнул к вам *"
-    #"* вы больше никогда не будите одиноки *"
-    #c " мр-мяу "
-    #y "да-да, мяу"
-    #window hide
-    
-#    scene good_End with Fade(1.0, 1.5, 1.0)
-
-#    with Pause(10)
-
 
 label start:
+
+    play music sity
 
     scene grayscreen
 
@@ -53,16 +40,20 @@ label start:
             jump main_choice
         "нет":
             jump choice_refuse
-        
+    
     return
  
 label choice_refuse:
 
     scene street
+    stop music fadeout(2.0) 
 
     "* вы решили не брать такую ответственность на себя *"
+       
+    play sound mew
 
     c "мяу?"
+
 
     window hide
     
@@ -76,6 +67,10 @@ label main_choice:
     scene street
      
     "* вы решили, что вам слишком одиноко в квартире и забрали кота *"
+
+    play sound purr
+
+    stop music fadeout(2.0) 
 
     scene home
 
@@ -139,6 +134,8 @@ label Food:
 
     hide maincat
 
+    play sound purr
+
     show playfullcat
 
     "* выкинув жестяную консерву в мусорку,\n вы вернулись к котенку, довольно вылизывавшего себе лапки и усы *"
@@ -157,24 +154,41 @@ label Food:
     return
 label playng: 
     scene home 
+
     show maincat
+
     "* вы ласково трогаете котенка за животик"
     "* он игриво отгоняет лапками вашу руку, энергично извиваясь на диване *"
+
     $ love += 2
+
+    play sound purr
+
     "* котенок счастливо прильнул к вам *"
+    
     c " мр-мяу "
+
+
     y "да-да, мяу"
     "* вы больше никогда не будите одиноки *"
+
     window hide
+
     scene goodending with Fade(1.0, 1.5, 1.0)
+
     with Pause(10)
     return
+
 label good_bathing:
-    scene home 
+
+    scene home
+
     show catthinks
     "* вы долго настраивали температуру воды, чтобы вашему новому другу было как можно приятнее *"
     "* решив для себя что все готово, вы осторожно взяли на руки котенка и опустили его в теплую ванночку *"
     "* ... *"
     "* коту все равно, тунец задобрил его и он флегматично наблюдает как вы вымываете его шерсть *"
+
     jump playng
+
     return
